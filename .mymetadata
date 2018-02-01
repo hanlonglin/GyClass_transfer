@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-module
+  type="WEB"
+  name="GyClass"
+  id="myeclipse.1515748453537"
+  context-root="/GyClass"
+  j2ee-spec="5.0"
+  archive="GyClass.war">
+  <attributes>
+    <attribute name="webrootdir" value="WebRoot" />
+  </attributes>
+</project-module>
+
