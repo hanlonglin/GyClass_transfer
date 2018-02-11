@@ -23,7 +23,7 @@
 	</head>
 
 	<body>
-<!-- 	  
+	  <!-- 
 		<form action="getTokenServlet" method="post">
 			<input type="text" name="uname" value="" />
 			<input type="password" name="passwd" value="" />
@@ -48,10 +48,12 @@
 			<input type="submit" value="提交" />
 		</form>
 
-		<form action="sendServlet" method="get">
-			<input type="text" name="uname" value="111" />
+	
+		获取周围设备
+		<form action="getDeviceServlet" method="get">
+			<input type="text" name="token" value="" />
 			<input type="submit" value="提交" />
 		</form>
- -->   
+    -->
 	</body>
 </html>

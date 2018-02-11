@@ -33,6 +33,7 @@ public class HttpTools {
 			HttpServletResponse response) {
 		String result = "";// 返回的结果
 		BufferedReader inData = null; // 读取响应流
+		java.net.HttpURLConnection httpConnData=null; //http连接
 		StringBuffer sb = new StringBuffer(); // 存储参数
 		String pa = "";// 编码之后的参数
 		try {
@@ -72,7 +73,7 @@ public class HttpTools {
 			// 创建URL对象
 			java.net.URL connURL = new java.net.URL(full_url);
 			// 打开URL连接
-			java.net.HttpURLConnection httpConnData = (java.net.HttpURLConnection) connURL
+			httpConnData = (java.net.HttpURLConnection) connURL
 					.openConnection();
 			// 设置通用属性
 			httpConnData.setRequestProperty("Accept", "/*");
@@ -120,6 +121,9 @@ public class HttpTools {
 			try {
 				if (inData != null) {
 					inData.close();
+				}
+				if(httpConnData!=null){
+					httpConnData.disconnect();
 				}
 			} catch (IOException eo) {
 				eo.printStackTrace();
@@ -256,4 +260,61 @@ public class HttpTools {
 		return str;
 	}
 	*/
+	/*
+	 * 获取周围设备列表
+	 * Authorization Bearer 【token】
+	 * get请求
+	 */
+	private static String GET_DEVICES_url = "http://hengbang.cassia.pro:8080/api/middleware/position/by-ap/*";
+	public String getDevices(String token)
+	{
+		String result="";//返回的结果
+		BufferedReader in=null; //读取响应流
+		StringBuffer sb=new StringBuffer(); //存储参数
+		String pa ="";// 编码之后的参数
+		try{	
+		
+			System.out.println("url:"+GET_DEVICES_url);
+			//创建URL对象
+			java.net.URL connURL=new java.net.URL(GET_DEVICES_url);
+			//打开URL连接
+			java.net.HttpURLConnection httpConn=(java.net.HttpURLConnection)connURL.openConnection();
+			//设置通用属性
+			httpConn.setRequestProperty("Accept", "/*");
+			//httpConn.setRequestProperty("Connection","Keep-Alive");
+			httpConn.setRequestProperty("Authorization",
+					"Bearer "+token);
+			//httpConn.setRequestProperty("","");
+			//建立实际的连接
+			httpConn.connect();
+			//获取响应头
+			Map<String,List<String>> headers=httpConn.getHeaderFields();
+			//遍历响应头字段
+			for(String key:headers.keySet())
+			{
+				System.out.println("key:"+key+",content:"+headers.get(key));
+			}
+			//定义BufferedReader 输入流来读取URL的响应，并设置编码方式
+			in=new BufferedReader(new InputStreamReader(httpConn.getInputStream(),"UTF-8"));
+			String line;
+			while((line=in.readLine())!=null)
+			{
+				result+=line;
+				System.out.println("line:"+line);
+			}
+		}catch(Exception e)
+		{
+			e.printStackTrace();
+		}finally{
+			try{
+				if(in!=null){
+					in.close();
+				}
+			}catch(IOException eo)
+			{
+				eo.printStackTrace();
+			}
+		}
+		return result;
+	}
 }

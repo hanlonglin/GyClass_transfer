@@ -28,6 +28,13 @@
     <servlet-name>sendServlet</servlet-name>
     <servlet-class>test.sendServlet</servlet-class>
   </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>getDeviceServlet</servlet-name>
+    <servlet-class>servlet.getDeviceServlet</servlet-class>
+  </servlet>
+
 
 
 
@@ -47,6 +54,10 @@
   <servlet-mapping>
     <servlet-name>sendServlet</servlet-name>
     <url-pattern>/sendServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>getDeviceServlet</servlet-name>
+    <url-pattern>/getDeviceServlet</url-pattern>
   </servlet-mapping>
   <welcome-file-list>
     <welcome-file>index.jsp</welcome-file>
